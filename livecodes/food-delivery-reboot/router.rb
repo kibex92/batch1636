@@ -2,10 +2,12 @@
 class Router
   def initialize(meals_controller, 
                 customers_controller,
-                sessions_controller)
+                sessions_controller,
+                orders_controller)
     @meals_controller = meals_controller
     @customers_controller = customers_controller
     @sessions_controller = sessions_controller
+    @orders_controller = orders_controller
     @running = true
   end
 
@@ -17,6 +19,7 @@ class Router
         display_menu
         # 2. Ask the user what they want to do
         action = gets.chomp.to_i
+        print `clear`
         # 3. Dispatch the user action to the controller
         dispatch(action)
       end
@@ -30,6 +33,7 @@ class Router
     puts "2 - Add a new meal"
     puts "3 - List all customers"
     puts "4 - Add a new customer"
+    puts "5 - Add a new order"
     puts "8 - Logout"
     puts "9 - Exit"
   end
@@ -58,6 +62,7 @@ class Router
     when 2 then @meals_controller.add
     when 3 then @customers_controller.list
     when 4 then @customers_controller.add
+    when 5 then @orders_controller.add
     when 8 then logout
     when 9 then stop
     else

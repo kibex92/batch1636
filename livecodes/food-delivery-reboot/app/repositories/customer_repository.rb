@@ -13,12 +13,15 @@ class CustomerRepository
     @customers
   end
 
-
   def create(customer)
     customer.id = @next_id
     @next_id += 1
     @customers << customer
     save_csv
+  end
+
+  def find(id)
+    @customers.find { |customer| customer.id == id }
   end
 
   private
